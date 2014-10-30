@@ -1,0 +1,21 @@
+{
+  "name": "comp6218-coursework",
+  "version": "0.0.0",
+  "description": "COMP6218: Web Architecture (2014-2015) Coursework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cbaines/comp6218-coursework.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cbaines/comp6218-coursework/issues"
+  },
+  "dependencies": {
+    "express": "^4.10.1"
+  }
+}
