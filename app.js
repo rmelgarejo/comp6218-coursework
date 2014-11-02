@@ -1,5 +1,12 @@
 var express = require('express');
+var orm = require('orm');
 var app = express();
+
+app.use(orm.express("sqlite://./data.sqlite", {
+    define: function (db, models, next) {
+        next();
+    }
+}));
 
 app.get('/', function (req, res) {
     res.send('Hello World!')
