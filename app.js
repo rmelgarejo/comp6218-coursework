@@ -4,12 +4,29 @@ var app = express();
 
 app.use(orm.express("sqlite://./data.sqlite", {
     define: function (db, models, next) {
+	console.log("creating the question table");
+	models.question = db.define("question",{ 
+		id        : { type: "serial", key: true },
+		question  : { type: "text" }
+        }, {
+		
+	});
         next();
     }
 }));
 
 app.get('/', function (req, res) {
-    res.send('Hello World!')
+	req.models.question.create([
+		{ 
+			question:	"Qué día es hoy?"
+		}],
+	function (err, items) {
+		console.log("inserting question");
+		if (err) {
+			console.log(err);
+		}
+	});
+    	res.send('Hello World!')
 });
 
 var router = express.Router();
@@ -26,10 +43,13 @@ router.get('/questions', function (req, res) {
 });
 
 router.get('/questions/:questionid', function (req, res) {
-  // return a specific question
-  res.json({
-    id: req.params.questionid
-  });
+	console.log("getting question with id " + req.params.questionid);
+	req.models.question.get(req.params.questionid, function (err, question) { 
+		if (err) {
+			console.log(err);
+		}
+		res.json(question);
+	});
 });
 
 router.get('/questions/:questionid/comments', function (req, res) {
